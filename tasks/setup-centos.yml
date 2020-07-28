@@ -1,8 +1,11 @@
 ---
 # Setup centos 7 by adding all dependencies for this role
+- name: Check for the correct OS distributon and version
+  fail:
+    msg: The OS distributon should be centos 7
+  when: ansible_distribution != "CentOS" or ansible_distribution_major_version != "7"
 - name: Install some package
   package: name={{ item }} state=present
-  when: ansible_distribution == "CentOS"
   with_items:
     - epel-release
     - wget
