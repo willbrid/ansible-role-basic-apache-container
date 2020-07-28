@@ -1,0 +1,6 @@
+---
+# defaults file for apache-container
+system_user: test
+webapp_port: 80
+file_template: index.html.j2
+domain: test

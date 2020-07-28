@@ -1,0 +1,3 @@
+---
+# vars file for apache-container
+apache_port: 80
