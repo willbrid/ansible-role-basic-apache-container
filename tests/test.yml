@@ -1,5 +1,5 @@
 ---
-- hosts: {{ domain }}
-  remote_user: {{ system_user }}
+- hosts: "{{ domain }}"
+  remote_user: "{{ system_user }}"
   roles:
     - ansible-role-basic-apache-container
