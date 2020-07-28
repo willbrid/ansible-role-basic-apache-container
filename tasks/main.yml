@@ -4,7 +4,7 @@
 - name: Check for the correct jinja2 file template
   fail:
     msg: The provided file template is not a jinja2 file
-  when: "{{ (file_template | splitext)[0] }} != j2"
+  when: "{{ (file_template | splitext)[1] }} != j2"
 - name: Copy website file template
   template:
     src: "{{ file_template }}"
