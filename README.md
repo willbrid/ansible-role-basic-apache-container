@@ -1,7 +1,5 @@
-Role Name
-=========
-
 Ansible Role : basic apache container
+=========
 
 Requirements
 ------------
