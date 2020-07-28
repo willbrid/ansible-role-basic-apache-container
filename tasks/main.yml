@@ -1,10 +1,6 @@
 ---
 # tasks file for ansible-role-basic-apache-container
 - include_tasks: "setup-centos.yml"
-- name: Check for the correct jinja2 file template
-  fail:
-    msg: The provided file template is not a jinja2 file
-  when: (file_template | basename | regex_search("(.j2)")) != ""
 - name: Copy website file template
   template:
     src: "{{ file_template }}"
