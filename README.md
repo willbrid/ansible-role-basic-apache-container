@@ -23,14 +23,16 @@ No dependencies
 Example Playbook
 ----------------
 
-For testing this role you should provider at least : system_user and domain variables
+For testing this role you should provider at least : system_user variable 
 
 - hosts: servers
   vars: 
     system_user: test
-    domain: test
   roles:
-      - { role: willbrid.ansible-role-basic-apache-container }
+      - { role: ansible-role-basic-apache-container }
+
+For testing with the embedded test in this role you should provide at least: 
+system_user and domain variables
 
 License
 -------
