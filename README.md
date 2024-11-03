@@ -8,7 +8,7 @@ Ce projet a pour objectif de fournir des rôles Ansible modulaires et faciles à
 
 ### Prérequis
 
-**Ansible version minimale recommandée** : **ansible version 2**
+**Ansible version minimale recommandée** : **ansible version 2** <br>
 **Systèmes supportés** : famille **Redhat** et famille **Debian**
 
 ### Utilisation
