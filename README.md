@@ -1,45 +1,40 @@
-Ansible Role : basic apache container
-=========
+# Ansible Roles Tools
 
-Requirements
-------------
+Ce dépôt contient une collection de rôles Ansible développés pour automatiser et standardiser différentes configurations et déploiements d'infrastructure.
 
-No requirements
+### Description
 
-Role Variables
---------------
+Ce projet a pour objectif de fournir des rôles Ansible modulaires et faciles à utiliser pour simplifier la gestion d’infrastructure et les tâches d'automatisation. Chaque rôle est conçu pour être réutilisable, maintenable et adaptable à divers environnements.
 
-This role comes with following variables defined in defaults/main.yml:
+### Prérequis
 
-```
-system_user: test
-webapp_port: 80
-file_template: index.html.j2
-domain: test
-```
+**Ansible version minimale recommandée** : **ansible version 2**
+**Systèmes supportés** : famille **Redhat** et famille **Debian**
 
-Dependencies
-------------
+### Utilisation
 
-No dependencies
-
-Example Playbook
-----------------
-
-For testing this role you should provider at least : system_user variable 
+1. Clonez le dépôt
 
 ```
-- hosts: servers
-  vars: 
-    system_user: test
+git clone https://github.com/willbrid/ansible-roles-tools.git
+```
+
+2. Ajoutez les rôles dans votre fichier playbook
+
+```
+- hosts: all
+
   roles:
-      - ansible-role-basic-apache-container
+    - role: chemin_vers_role_1
+    - role: chemin_vers_role_2
 ```
 
-For testing with the embedded test in this role you should provide at least: 
-system_user and domain variables
+3. Exécutez votre playbook
 
-License
--------
+```
+ansible-playbook -i hosts playbook.yml
+```
 
-GPLv3
+### Contributions
+
+Les contributions sont les bienvenues !
