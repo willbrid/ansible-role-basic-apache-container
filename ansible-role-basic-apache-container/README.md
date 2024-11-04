@@ -10,17 +10,19 @@ file_template: index.html.j2
 domain: test
 ```
 
-Example Playbook
+Exemple Playbook
 ----------------
 
 Pour tester ce rôle, vous devez fournir au moins : variable **system_user**
 
 ```
 - hosts: servers
+  
   vars: 
     system_user: test
+  
   roles:
-      - ansible-role-basic-apache-container
+  - ansible-role-basic-apache-container
 ```
 
 Pour tester avec le test intégré dans ce rôle, vous devez fournir au moins : les variables **system_user** et **domain**.
