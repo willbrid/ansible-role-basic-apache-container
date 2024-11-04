@@ -1,5 +1,5 @@
-Ansible Role : basic apache container
-=========
+Role Ansible : basic apache container
+======================================
 
 Ce rôle est fourni avec les variables suivantes définies dans **defaults/main.yml** :
 
