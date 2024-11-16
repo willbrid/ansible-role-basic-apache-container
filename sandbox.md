@@ -3,7 +3,7 @@
 Il s'agit ici de monter un environnement sandbox via **vagrant** pour tester et valider les rôles Ansible dans une configuration virtualisée locale. Nous utilisons ici **virtualbox 7.0** couplé à **vagrant**.
 
 ```
-mkdir $HOME/ansible-multi-platform
+mkdir $HOME/ansible-multi-platform && cd $HOME/ansible-multi-platform
 ```
 
 ```
@@ -11,7 +11,7 @@ wget https://download.virtualbox.org/virtualbox/7.0.20/VBoxGuestAdditions_7.0.20
 ```
 
 ```
-vi $HOME/ansible-multi-platform/Vagrantfile
+vi Vagrantfile
 ```
 
 ```
