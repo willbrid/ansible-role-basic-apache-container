@@ -1,10 +1,12 @@
 # Ansible-Roles-Tools
 
-Ce dépôt contient une collection de rôles Ansible développés pour automatiser et standardiser différentes configurations et déploiements d'infrastructure.
+Ce référentiel contient une collection de rôles Ansible développés pour automatiser et standardiser différentes configurations 
+et déploiements d'infrastructure.
 
 ### Description
 
-Ce projet a pour objectif de fournir des rôles Ansible modulaires et faciles à utiliser pour simplifier la gestion d’infrastructure et les tâches d'automatisation. Chaque rôle est conçu pour être réutilisable, maintenable et adaptable à divers environnements.
+Ce projet a pour objectif de fournir des rôles Ansible modulaires et faciles à utiliser pour simplifier la gestion d’infrastructure et 
+les tâches d'automatisation. Chaque rôle est conçu pour être réutilisable, maintenable et adaptable à divers environnements.
 
 ### Prérequis
 
@@ -13,4 +15,4 @@ Ce projet a pour objectif de fournir des rôles Ansible modulaires et faciles à
 
 ### Contributions
 
-Les contributions sont les bienvenues !
+Les contributions sont les bienvenues !
