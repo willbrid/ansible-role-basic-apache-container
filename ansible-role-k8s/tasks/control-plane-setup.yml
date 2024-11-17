@@ -1,0 +1,15 @@
+---
+- name: Authorize the necessary ports permanently
+  firewalld:
+    port: "{{ item }}/tcp"
+    permanent: yes
+    state: enabled
+    immediate: yes
+  loop: "{{ kubernetes_control_plane_ports }}"
+  when: ansible_os_family == "RedHat"
+
+- import_tasks: init-control-plane-setup.yml
+  when: kubernetes_role == 'primary_control_plane'
+
+- import_tasks: join-control-plane-setup.yml
+  when: kubernetes_role == 'secondary_control_plane'

@@ -1,0 +1,24 @@
+---
+- name: Define cri-o repo
+  copy:
+    dest: /etc/yum.repos.d/cri-o.repo
+    content: |
+      [cri-o]
+      name=CRI-O
+      baseurl=https://pkgs.k8s.io/addons:/cri-o:/stable:/v{{ kubernetes_version }}/rpm/
+      enabled=1
+      gpgcheck=1
+      gpgkey=https://pkgs.k8s.io/addons:/cri-o:/stable:/v{{ kubernetes_version }}/rpm/repodata/repomd.xml.key
+      exclude=cri-o
+
+- name: Install cri-o
+  dnf:
+    name: cri-o
+    state: present
+    disable_excludes: cri-o
+
+- name: Activate and start the crio service
+  systemd:
+    name: crio
+    enabled: yes
+    state: started

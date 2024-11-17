@@ -1,0 +1,20 @@
+---
+kubernetes_version: '1.28'
+kubernetes_specific_version: '1.28.0'
+kubernetes_role: "primary_control_plane"
+kubernetes_control_plane_ip: ""
+kubernetes_control_plane_endpoint: ""
+kubernetes_cni_network:
+  cni: 'calico'
+  cidr: '172.16.0.0/16'
+  manifest: "https://docs.projectcalico.org/manifests/calico.yaml"
+kubernetes_control_plane_ports:
+- '6443'
+- '2379-2380'
+- '10250'
+- '10257'
+- '10259'
+kubernetes_node_ports:
+- '10250'
+- '10256'
+- '30000-32767'

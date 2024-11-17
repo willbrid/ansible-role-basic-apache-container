@@ -1,0 +1,16 @@
+---
+- name: Get the join command from the control plane for the new control plane 
+  shell: >
+    echo $(kubeadm token create --print-join-command) --control-plane 
+    --certificate-key $(kubeadm init phase upload-certs --upload-certs | grep -vw -e certificate -e Namespace)
+  delegate_to: "{{ kubernetes_control_plane_ip }}"
+  changed_when: false
+  register: join_control_plane_command_result
+
+- name: Join control plane to the cluster
+  shell: > 
+    {{ join_control_plane_command_result.stdout }} 
+    --apiserver-advertise-address {{ ansible_ssh_host }}
+  register: kubeadm_join_control_plane
+  changed_when: kubeadm_join_control_plane.rc == 0
+  failed_when: (join_control_plane_command_result.stdout is not defined) or (kubeadm_join_control_plane.rc != 0)

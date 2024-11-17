@@ -1,0 +1,31 @@
+---
+- name: Initialize kubernetes control plane
+  command: >
+    kubeadm init --pod-network-cidr {{ kubernetes_cni_network.cidr }} 
+    --apiserver-advertise-address {{ kubernetes_control_plane_ip }}
+    --kubernetes-version {{ kubernetes_specific_version }}
+    --control-plane-endpoint {{ kubernetes_control_plane_endpoint }}
+  register: kubeadm_init
+  changed_when: "'successfully' in kubeadm_init.stdout"
+  
+- name: Create .kube directory
+  file:
+    path: ~/.kube
+    state: directory
+    mode: 0755
+
+- name: Create a symbolic link ~/.kube/config of the kubectl file admin.conf
+  file:
+    src: /etc/kubernetes/admin.conf
+    dest: ~/.kube/config
+    state: link
+    mode: 0644
+
+- name: Configure networking cni
+  command: "kubectl apply -f {{ kubernetes_cni_network.manifest }}"
+  register: cni_result
+  changed_when: "'created' in cni_result.stdout"
+  failed_when: ('created' not in cni_result.stdout) or (kubernetes_cni_network.cni is not defined) or (kubernetes_cni_network.cni not in ['calico','flannel','weave'])
+  until: cni_result is not failed
+  retries: 7
+  delay: 5

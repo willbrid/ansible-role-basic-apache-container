@@ -1,0 +1,21 @@
+---
+- name: Authorize the necessary ports permanently
+  firewalld:
+    port: "{{ item }}/tcp"
+    permanent: yes
+    state: enabled
+    immediate: yes
+  loop: "{{ kubernetes_node_ports }}"  
+  when: ansible_os_family == "RedHat"
+  
+- name: Get the join command from the control plane
+  command: kubeadm token create --print-join-command
+  delegate_to: "{{ kubernetes_control_plane_ip }}"
+  changed_when: false
+  register: join_command_result
+
+- name: Join node to the cluster
+  shell: "{{ join_command_result.stdout }}"
+  register: kubeadm_join
+  changed_when: kubeadm_join.rc == 0
+  failed_when: (join_command_result.stdout is not defined) or (kubeadm_join.rc != 0)

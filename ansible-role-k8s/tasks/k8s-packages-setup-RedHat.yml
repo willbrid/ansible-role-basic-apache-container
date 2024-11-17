@@ -1,0 +1,27 @@
+---
+- name: Define kubernetes repo
+  copy:
+    dest: /etc/yum.repos.d/kubernetes.repo
+    content: |
+      [kubernetes]
+      name=Kubernetes
+      baseurl=https://pkgs.k8s.io/core:/stable:/v{{ kubernetes_version }}/rpm/
+      enabled=1
+      gpgcheck=1
+      gpgkey=https://pkgs.k8s.io/core:/stable:/v{{ kubernetes_version }}/rpm/repodata/repomd.xml.key
+      exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
+
+- name: Install kubernetes packages
+  dnf:
+    name: 
+    - "kubelet-{{ kubernetes_specific_version }}"
+    - "kubeadm-{{ kubernetes_specific_version }}"
+    - "kubectl-{{ kubernetes_specific_version }}"
+    state: present
+    disable_excludes: kubernetes
+
+- name: Activate and start the kubelet service
+  systemd:
+    name: kubelet
+    enabled: yes
+    state: started

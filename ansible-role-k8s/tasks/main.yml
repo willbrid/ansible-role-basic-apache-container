@@ -1,0 +1,32 @@
+---
+- name: 'Check mandatory variables'
+  assert:
+    that:
+    - kubernetes_control_plane_ip is defined and kubernetes_control_plane_ip | length > 0
+    - kubernetes_control_plane_endpoint is defined and kubernetes_control_plane_endpoint | length > 0
+    fail_msg: "One or more mandatory variables are either undefined or empty."
+
+- name: Force ansible_os_family to RedHat if it is Rocky
+  set_fact:
+    ansible_os_family: "RedHat"
+  when: ansible_os_family == "Rocky"
+
+- name: System setup
+  include_tasks: system-setup-{{ ansible_os_family }}.yml
+
+- name: Cri-o setup
+  include_tasks: crio-setup-{{ ansible_os_family }}.yml
+
+- name: Kubernetes packages setup
+  include_tasks: k8s-packages-setup-{{ ansible_os_family }}.yml
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Control plane setup
+  import_tasks: control-plane-setup.yml
+  when: kubernetes_role == 'primary_control_plane' or kubernetes_role == 'secondary_control_plane'
+
+- name: Node setup
+  import_tasks: node-setup.yml
+  when: kubernetes_role == 'node'

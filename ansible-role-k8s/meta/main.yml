@@ -1,0 +1,22 @@
+galaxy_info:
+  author: William Bridge
+  description: Kubernetes installation for RedHat/Rocky and Debian/Ubuntu
+  license: license (BSD, MIT)
+  min_ansible_version: 2.10
+  platforms:
+  - name: Fedora
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  galaxy_tags:
+  - kubernetes
+  - k8s
+  - orchestration
+  - system
+  - container
+  - cri-o
+  - kudeadm
+
+dependencies: []

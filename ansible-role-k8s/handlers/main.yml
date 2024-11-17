@@ -1,0 +1,9 @@
+---
+- name: Reload firewalld
+  service:
+    name: firewalld
+    state: reloaded
+
+- name: Apply sysctl settings
+  command: sysctl --system
+  changed_when: true
