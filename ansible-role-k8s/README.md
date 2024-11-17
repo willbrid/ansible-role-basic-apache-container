@@ -40,8 +40,8 @@ Les variables suivantes doivent être définies pour garantir que le rôle fonct
 Description des Variables
 ----------------------------
 
-- **kubernetes_version** : version de kubernetes à installer >= 1.28
-- **kubernetes_specific_version** : version spécifique de kubernetes. Exemple : 1.28.0
+- **kubernetes_version** : version de kubernetes à installer **>= 1.28**
+- **kubernetes_specific_version** : version spécifique de kubernetes, **Exemple: 1.28.0**
 - **kubernetes_role** : rôle du noeud à configurer. Valeurs possibles : **primary_control_plane**, **secondary_control_plane**, **node**
 - **kubernetes_control_plane_ip** : adresse ip du noeud plan de contrôle
 - **kubernetes_control_plane_endpoint** : adresse ip ou nom dns du endpoint du plan de contrôle
@@ -51,6 +51,30 @@ Description des Variables
 --- **kubernetes_cni_network.manifest** : fichier manifest d'installation du plugin réseau
 - **kubernetes_control_plane_ports** : ports réseau à autoriser pour le bon fonctionnement du noeud plan de contrôle
 - **kubernetes_node_ports** : ports réseau à autoriser pour le bon fonctionnement du noeud worker
+
+**Configuration par défaut**
+
+```
+kubernetes_version: '1.28'
+kubernetes_specific_version: '1.28.0'
+kubernetes_role: "primary_control_plane"
+kubernetes_control_plane_ip: ""
+kubernetes_control_plane_endpoint: ""
+kubernetes_cni_network:
+  cni: 'calico'
+  cidr: '172.16.0.0/16'
+  manifest: "https://docs.projectcalico.org/manifests/calico.yaml"
+kubernetes_control_plane_ports:
+- '6443'
+- '2379-2380'
+- '10250'
+- '10257'
+- '10259'
+kubernetes_node_ports:
+- '10250'
+- '10256'
+- '30000-32767'
+```
 
 Dépendances
 -------------
