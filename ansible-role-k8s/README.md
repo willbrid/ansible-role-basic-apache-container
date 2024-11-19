@@ -10,7 +10,7 @@ Exigences
 
 Le fichier d'inventaire doit être organisé pour refléter les différents types de nœuds de votre cluster Kubernetes au travers des différentes valeurs possibles de rôle : **primary_control_plane**, **secondary_control_plane** et **node**.
 
-**Exemple pour un cluster avec 3 noeuds plan de contrôle, et 4 noeuds worker**
+**Exemple pour un cluster avec 3 noeuds plan de contrôle (1 noeud principal et 2 noeuds secondaire) et 4 noeuds worker**
 
 ```
 [primary_control_plane]
