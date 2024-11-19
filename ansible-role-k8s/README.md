@@ -132,12 +132,12 @@ Exemples Playbook
   - ansible-role-k8s
 ```
 
-License
+Licence
 -------
 
 BSD,MIT
 
-Author Information
+Informations sur l'auteur
 ------------------
 
 William Bridge NGASSAM
