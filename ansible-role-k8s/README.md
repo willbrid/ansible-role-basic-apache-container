@@ -52,7 +52,7 @@ Description des Variables
 - **kubernetes_control_plane_ports** : ports réseau à autoriser pour le bon fonctionnement du noeud plan de contrôle
 - **kubernetes_node_ports** : ports réseau à autoriser pour le bon fonctionnement du noeud worker
 
-**Configuration par défaut**
+**Valeurs par défaut de toutes les variables**
 
 ```
 kubernetes_version: '1.28'
