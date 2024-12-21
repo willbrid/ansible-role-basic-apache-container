@@ -1,16 +1,15 @@
 ---
-# Setup centos 7 by adding all dependencies for this role
-- name: Check for the correct OS distributon and version
-  fail:
-    msg: The OS distributon should be centos 7
-  when: ansible_distribution != "CentOS" or ansible_distribution_major_version != "7"
-- name: Install some package
+# Setup RedHat by adding all dependencies for this role
+
+- name: Install some packages
   package: name={{ item }} state=present
   with_items:
-    - epel-release
-    - wget
-    - git
+  - epel-release
+  - wget
+  - git
+
 - name: install python-pip
   yum: name=python-pip state=present update_cache=yes
+
 - name: Install docker python
   pip: name=docker-py
