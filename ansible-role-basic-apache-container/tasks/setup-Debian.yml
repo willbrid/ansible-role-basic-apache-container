@@ -1,0 +1,12 @@
+---
+# Setup Debian by adding all dependencies for this role
+
+- name: Install some packages
+  apt:
+    pkg:  
+    - wget
+    - git
+    - python3-pip
+
+- name: Install docker python
+  pip: name=docker-py
