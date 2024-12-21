@@ -5,9 +5,13 @@ Ce rôle est fourni avec les variables suivantes définies dans **defaults/main.
 
 ```
 system_user: test
-webapp_port: 8080
-file_template: index.html.j2
 domain: test
+webapp_container_name: "webapp"
+webapp_container_port: 80
+webapp_file_index_template: index.html.j2
+apache_image_version: "latest" # httpd image version
+apache_port: 80
+apache_website_folder: "/usr/local/apache2/htdocs"
 ```
 
 Exemple Playbook
@@ -20,9 +24,10 @@ Pour tester ce rôle, vous devez fournir au moins : variable **system_user**
   
   vars: 
     system_user: test
+    domain: test
   
   roles:
   - ansible-role-basic-apache-container
 ```
 
-Pour tester avec le test intégré dans ce rôle, vous devez fournir au moins : les variables **system_user** et **domain**.
+Pour effectuer un test avec le fichier de test intégré dans ce rôle, il est nécessaire de fournir au minimum les variables **system_user** et **domain**.
