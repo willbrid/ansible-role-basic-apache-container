@@ -1,15 +1,22 @@
 ---
-# tasks file for ansible-role-basic-apache-container
-- include_tasks: "setup-centos.yml"
+- name: Force ansible_os_family to RedHat if it is Rocky
+  set_fact:
+    ansible_os_family: "RedHat"
+  when: ansible_os_family == "Rocky"
+
+- name: System setup
+  include_tasks: "setup-{{ ansible_os_family }}.yml"
+
 - name: Copy website file template
   template:
-    src: "{{ file_template }}"
+    src: "{{ webapp_file_index_template }}"
     dest: "/home/{{ system_user }}/index.html"
+
 - name: Create Apache container
   docker_container:
-    name: webapp
-    image: httpd
+    name: "{{ webapp_container_name }}"
+    image: "httpd:{{ apache_image_version }}"
     ports:
-        - "{{ webapp_port }}:{{ apache_port }}"
+    - "{{ webapp_container_port }}:{{ apache_port }}"
     volumes:
-        - "/home/{{ system_user }}/index.html:/usr/local/apache2/htdocs/index.html"
+    - "/home/{{ system_user }}:{{ apache_website_folder }}"
