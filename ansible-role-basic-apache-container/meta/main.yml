@@ -1,13 +1,16 @@
 ---
 galaxy_info:
   author: William Bridge
-  description: Webapp installation using apache docker container for Centos7
+  description: Webapp installation using apache docker container for RedHat and Debian distribution
   license: license GPLv3
-  min_ansible_version: 1.2
+  min_ansible_version: 2.10
   platforms:
-    - name: Centos
-      versions:
-        - 7
+  - name: Fedora
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
   galaxy_tags:
     - web
     - apache
