@@ -9,4 +9,4 @@
     - python3-pip
 
 - name: Install docker python
-  pip: name=docker-py
+  pip: name=docker state=present
