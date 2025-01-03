@@ -25,3 +25,15 @@
     name: kubelet
     enabled: yes
     state: started
+
+- name: Indicate the node IP address to kubelet
+  lineinfile:
+    path: "{{ kubelet_config_sourced_file }}"
+    regexp: '^KUBELET_EXTRA_ARGS='
+    line: "KUBELET_EXTRA_ARGS='--node-ip={{ ansible_ssh_host }}'"
+    state: present
+
+- name: Restart kubelet service
+  systemd:
+    name: kubelet
+    state: restarted
