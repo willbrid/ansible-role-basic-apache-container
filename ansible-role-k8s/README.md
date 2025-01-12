@@ -48,6 +48,7 @@ Description des Variables
 - **kubernetes_cni_network** : variable de configuration du plugin réseau : <br>
 --- **kubernetes_cni_network.cni** : nom du plugin réseau. Valeurs possibles : **calico**, **flannel**, **weave** <br>
 --- **kubernetes_cni_network.cidr** : plage réseau cidr récommandée par le plugin réseau <br>
+--- **kubernetes_cni_network.pod_host_port** : port d'hôte d'intercommunication entre les pods du plugin réseau <br>
 --- **kubernetes_cni_network.manifest** : fichier manifest d'installation du plugin réseau
 - **kubernetes_control_plane_ports** : ports réseau à autoriser pour le bon fonctionnement du noeud plan de contrôle
 - **kubernetes_node_ports** : ports réseau à autoriser pour le bon fonctionnement du noeud worker
