@@ -1,0 +1,42 @@
+---
+- name: Ensure /etc/apt/keyrings directory exists
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
+- name: Download cri-o GPG key
+  get_url:
+    url: "https://pkgs.k8s.io/addons:/cri-o:/stable:/v{{ kubernetes_version }}/deb/Release.key"
+    dest: /tmp/cri-o-apt-keyring.gpg
+
+- name: Convert cri-o GPG key to keyring format
+  shell: cat /tmp/cri-o-apt-keyring.gpg | gpg --dearmor --yes -o /etc/apt/keyrings/cri-o-apt-keyring.gpg && rm /tmp/cri-o-apt-keyring.gpg
+
+- name: Setup 644 permission for cri-o-apt-keyring.gpg file
+  file:
+    path: /etc/apt/keyrings/cri-o-apt-keyring.gpg
+    mode: '0644'
+
+- name: Add cri-o repository to sources list
+  lineinfile:
+    path: /etc/apt/sources.list.d/cri-o.list
+    line: "deb [signed-by=/etc/apt/keyrings/cri-o-apt-keyring.gpg] https://pkgs.k8s.io/addons:/cri-o:/stable:/v{{ kubernetes_version }}/deb/ /"
+    create: yes
+
+- name: Install cri-o
+  apt:
+    name: cri-o
+    state: present
+    update_cache: yes
+
+- name: Prevent cri-o package from being upgraded
+  dpkg_selections:
+    name: cri-o
+    selection: hold
+
+- name: Activate and start the crio service
+  systemd:
+    name: crio
+    enabled: yes
+    state: started
