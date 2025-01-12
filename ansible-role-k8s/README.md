@@ -56,8 +56,8 @@ Description des Variables
 **Valeurs par défaut de toutes les variables**
 
 ```
-kubernetes_version: '1.28'
-kubernetes_specific_version: '1.28.0'
+kubernetes_version: '1.29'
+kubernetes_specific_version: '1.29.0'
 kubernetes_role: "primary_control_plane"
 kubernetes_control_plane_ip: ""
 kubernetes_control_plane_endpoint: ""
