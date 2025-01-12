@@ -1,0 +1,52 @@
+---
+- name: Download kubernetes GPG key
+  get_url:
+    url: "https://pkgs.k8s.io/core:/stable:/v{{ kubernetes_version }}/deb/Release.key"
+    dest: /tmp/kubernetes-apt-keyring.gpg  
+
+- name: Convert kubernetes GPG key to keyring format
+  shell: cat /tmp/kubernetes-apt-keyring.gpg | gpg --dearmor --yes -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg && rm /tmp/kubernetes-apt-keyring.gpg
+
+- name: Setup 644 permission for kubernetes-apt-keyring.gpg file
+  file:
+    path: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    mode: '0644'
+
+- name: Add kubernetes repository to sources list
+  lineinfile:
+    path: /etc/apt/sources.list.d/kubernetes.list
+    line: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v{{ kubernetes_version }}/deb/ /"
+    create: yes
+
+- name: Install kubernetes packages
+  apt:
+    pkg:
+    - "kubelet={{ kubernetes_specific_version }}*"
+    - "kubeadm={{ kubernetes_specific_version }}*"
+    - "kubectl={{ kubernetes_specific_version }}*"  
+    state: present
+    update_cache: yes
+
+- name: Prevent kubernetes packages from being upgraded
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  loop:
+  - kubeadm
+  - kubelet
+  - kubectl
+
+- name: Activate and start the kubelet service
+  systemd:
+    name: kubelet
+    enabled: yes
+    state: started
+
+- name: Indicate the node IP address to kubelet
+  lineinfile:
+    path: "{{ kubelet_config_sourced_file }}"
+    regexp: '^KUBELET_EXTRA_ARGS='
+    line: "KUBELET_EXTRA_ARGS='--node-ip={{ ansible_ssh_host }}'"
+    state: present
+    create: yes
+  notify: Restart kubelet
