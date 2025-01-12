@@ -1,9 +1,9 @@
 ---
-- name: Disable SELinux
+- name: Configure SELinux in permissive mode in current session
   command: setenforce 0
   when: ansible_selinux.status == "enabled"
 
-- name: Configure SELinux in permissive mode
+- name: Configure SELinux in permissive mode in config file
   replace:
     path: /etc/sysconfig/selinux
     regexp: '^SELINUX=enforcing'
@@ -15,9 +15,16 @@
     zone: public
     masquerade: "true"
     permanent: yes
-    immediate: no
+    immediate: yes
     state: enabled
-  notify: Reload firewalld
+
+- name: Authorize cni pod network host port
+  firewalld:
+    port: "{{ kubernetes_cni_network.pod_host_port }}/tcp"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  when: kubernetes_cni_network.pod_host_port != ""
 
 - name: Disable swap temporarily
   command: swapoff -a
