@@ -64,6 +64,7 @@ kubernetes_control_plane_endpoint: ""
 kubernetes_cni_network:
   cni: 'calico'
   cidr: '172.16.0.0/16'
+  pod_host_port: "179"
   manifest: "https://docs.projectcalico.org/manifests/calico.yaml"
 kubernetes_control_plane_ports:
 - '6443'
