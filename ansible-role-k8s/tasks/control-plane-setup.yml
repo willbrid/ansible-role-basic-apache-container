@@ -3,8 +3,8 @@
   firewalld:
     port: "{{ item }}/tcp"
     permanent: yes
-    state: enabled
     immediate: yes
+    state: enabled
   loop: "{{ kubernetes_control_plane_ports }}"
   when: ansible_os_family == "RedHat"
 
