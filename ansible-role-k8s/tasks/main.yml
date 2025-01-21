@@ -24,7 +24,10 @@
   include_tasks: k8s-packages-setup-{{ ansible_os_family }}.yml
 
 - name: Flush handlers
-  meta: flush_handlers
+  debug:
+    msg: "Executing all handlers"
+
+- meta: flush_handlers
 
 - name: Control plane setup
   import_tasks: control-plane-setup.yml
