@@ -1,2 +1,0 @@
----
-kubelet_config_sourced_file: "/etc/default/kubelet"
