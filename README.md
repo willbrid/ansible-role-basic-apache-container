@@ -1,4 +1,4 @@
-Role Ansible : basic apache container
+Ansible-role-basic-apache-container
 ======================================
 
 Ce rôle est fourni avec les variables suivantes définies dans **defaults/main.yml** :
@@ -30,3 +30,8 @@ Pour tester ce rôle, vous devez fournir au moins : variable **system_user**
 ```
 
 Pour effectuer un test avec le fichier de test intégré dans ce rôle, il est nécessaire de fournir au minimum les variables **system_user** et **domain**.
+
+Informations sur l'auteur
+------------------
+
+William Bridge NGASSAM
