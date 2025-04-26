@@ -1,15 +1,13 @@
 ---
-# Setup RedHat by adding all dependencies for this role
-
 - name: Install some packages
-  package: name={{ item }} state=present
+  ansible.builtin.package: name={{ item }} state=present
   with_items:
-  - epel-release
-  - wget
-  - git
+    - epel-release
+    - wget
+    - git
 
 - name: install python-pip
-  yum: name=python-pip state=present update_cache=yes
+  ansible.builtin.yum: name=python-pip state=present update_cache=yes
 
 - name: Install docker python
-  pip: name=docker state=present
+  ansible.builtin.pip: name=docker state=present

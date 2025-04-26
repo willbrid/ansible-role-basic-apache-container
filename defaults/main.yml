@@ -1,5 +1,4 @@
 ---
-# defaults file for apache-container
 system_user: test
 domain: test
 webapp_container_name: "webapp"

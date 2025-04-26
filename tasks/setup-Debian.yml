@@ -1,12 +1,10 @@
 ---
-# Setup Debian by adding all dependencies for this role
-
 - name: Install some packages
-  apt:
+  ansible.builtin.apt:
     pkg:  
     - wget
     - git
     - python3-pip
 
 - name: Install docker python
-  pip: name=docker state=present
+  ansible.builtin.pip: name=docker state=present
