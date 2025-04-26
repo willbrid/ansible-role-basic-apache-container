@@ -1,16 +1,23 @@
 ---
 galaxy_info:
   author: William Bridge
+  role_name: basic_apache_container
+  namespace: willbrid
   description: Webapp installation using apache docker container for RedHat and Debian distribution
   license: license GPLv3
-  min_ansible_version: 2.10
+  min_ansible_version: "2.16"
   platforms:
-  - name: Fedora
-    versions:
-    - all
-  - name: Debian
-    versions:
-    - all
+    - name: Rocky
+      versions:
+        - "9.2"
+    - name: Debian
+      versions:
+        - "bookworm"
+        - "bullseye"
+    - name: Ubuntu
+      versions:
+        - "noble"
+        - "jammy"
   galaxy_tags:
     - web
     - apache
@@ -19,5 +26,3 @@ galaxy_info:
     - httpd
 dependencies:
   - role: geerlingguy.docker
-  # List your role dependencies here, one per line. Be sure to remove the '[]' above,
-  # if you add dependencies to this list.
