@@ -11,12 +11,11 @@
     dest: "{{ bac_container_mount_dir }}/index.html"
     mode: 0644
 
-- name: Create Apache container
+- name: Create apache container
   community.docker.docker_container:
     name: "{{ bac_container_name }}"
     image: "httpd:{{ bac_apache_image_version }}"
     state: started
-    restart: true
     restart_policy: "always"
     ports:
       - "{{ bac_container_port }}:{{ bac_apache_port }}"
