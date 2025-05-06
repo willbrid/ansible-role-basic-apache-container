@@ -1,22 +1,24 @@
 ---
-- name: Force ansible_os_family to RedHat if it is Rocky
-  ansible.builtin.set_fact:
-    ansible_os_family: "RedHat"
-  when: ansible_os_family == "Rocky"
-
-- name: System setup
-  ansible.builtin.include_tasks: "setup-{{ ansible_os_family }}.yml"
+- name: Create website directory if not exist
+  ansible.builtin.file:
+    path: "{{ bac_container_mount_dir }}"
+    state: directory
+    mode: 0755
 
 - name: Copy website file template
   ansible.builtin.template:
-    src: "{{ webapp_file_index_template }}"
-    dest: "/home/{{ system_user }}/index.html"
+    src: "{{ bac_file_index_template }}"
+    dest: "{{ bac_container_mount_dir }}/index.html"
+    mode: 0644
 
 - name: Create Apache container
-  ansible.builtin.docker_container:
-    name: "{{ webapp_container_name }}"
-    image: "httpd:{{ apache_image_version }}"
+  community.docker.docker_container:
+    name: "{{ bac_container_name }}"
+    image: "httpd:{{ bac_apache_image_version }}"
+    state: started
+    restart: true
+    restart_policy: "always"
     ports:
-      - "{{ webapp_container_port }}:{{ apache_port }}"
+      - "{{ bac_container_port }}:{{ bac_apache_port }}"
     volumes:
-      - "/home/{{ system_user }}:{{ apache_website_folder }}"
+      - "{{ bac_container_mount_dir }}:{{ bac_apache_website_folder }}"
