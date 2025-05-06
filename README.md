@@ -1,37 +1,87 @@
-Ansible-role-basic-apache-container
-======================================
+# Ansible-role-basic-apache-container
 
-Ce rôle est fourni avec les variables suivantes définies dans **defaults/main.yml** :
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/willbrid/ansible-role-basic-apache-container/blob/main/LICENSE)
 
+Ce rôle simple permet de déployer un conteneur Apache à partir de l'image **httpd** et d'y héberger une page web statique **index.html**.
+
+## Exigences
+
+Ce rôle repose fortement sur le rôle **geerlingguy.pip**, qui est automatiquement exécuté en amont afin d’installer le package **Python docker** sur les hôtes cibles, nécessaire au bon fonctionnement du module **community.docker.docker_container**.
+
+## Description des Variables
+
+|Nom|Type|Description|Obligatoire|Valeur par défaut|
+|---|----|-----------|-----------|-----------------|
+`bac_container_name`|str|nom du conteneur de l'application web à installer|oui|`""`
+`bac_container_port`|int|port du conteneur de l'application web à publier|non|`80`
+`bac_container_mount_dir`|str|chemin du repertoire d'hébergement de l'application web|oui|`""`
+`bac_file_index_template`|str|template jinja de la page index.html|non|`"index.html.j2"`
+`bac_apache_image_version`|str|tag de l'image httpd à utiliser|non|`"latest"`
+`bac_apache_website_folder`|str|repertoire d'hébergement de l'application web à l'intérieur du conteneur |non|`"/usr/local/apache2/htdocs"`
+
+## Dépendances
+
+La collection **community.docker** doit être préalablement installée via la commande **ansible-galaxy**.
+
+```bash
+ansible-galaxy collection install community.docker
 ```
-system_user: test
-domain: test
-webapp_container_name: "webapp"
-webapp_container_port: 80
-webapp_file_index_template: index.html.j2
-apache_image_version: "latest" # httpd image version
-apache_website_folder: "/usr/local/apache2/htdocs"
+
+Les systèmes cibles doivent avoir Docker installé. Pour cela, vous pouvez par exemple utiliser le rôle **geerlingguy.docker**.
+
+## Exemple Playbook
+
+- Installation du rôle
+
+```bash
+mkdir -p $HOME/install-basic-apache-container/roles
 ```
 
-Exemple Playbook
-----------------
-
-Pour tester ce rôle, vous devez fournir au moins : variable **system_user**
-
+```bash
+vim $HOME/install-basic-apache-container/requirements.yml
 ```
-- hosts: servers
-  
-  vars: 
-    system_user: test
-    domain: test
-  
+
+```yaml
+- name: ansible-role-basic-apache-container
+  src: https://github.com/willbrid/ansible-role-basic-apache-container.git
+  version: v0.0.1
+```
+
+```bash
+cd $HOME/install-basic-apache-container && ansible-galaxy install -r requirements.yml --roles-path roles
+```
+
+> On suppose qu’un fichier `hosts.ini` (dans le repertoire `$HOME/install-basic-apache-container`) est défini, contenant l’inventaire des serveurs de groupe `webapp` utilisant des distributions Debian ou RedHat.
+
+- Utilisation du rôle dans un playbook
+
+```bash
+vim $HOME/install-basic-apache-container/playbook.yml
+```
+
+```yaml
+---
+- hosts: webapp
+  vars:
+    bac_container_name: "webapp"
+    bac_container_port: 8080
+    bac_container_mount_dir: "/opt/webapp"
+    bac_file_index_template: index.html.j2
+    bac_apache_image_version: "latest"
+    bac_apache_website_folder: "/usr/local/apache2/htdocs"
+
   roles:
-  - ansible-role-basic-apache-container
+    - ansible-role-basic-apache-container
 ```
 
-Pour effectuer un test avec le fichier de test intégré dans ce rôle, il est nécessaire de fournir au minimum les variables **system_user** et **domain**.
+```bash
+cd $HOME/install-basic-apache-container && ansible-playbook -i hosts.ini playbook.yml
+```
 
-Informations sur l'auteur
-------------------
+## Licence
+
+MIT
+
+## Informations sur l'auteur
 
 William Bridge NGASSAM
