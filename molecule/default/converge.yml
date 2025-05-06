@@ -1,0 +1,39 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  vars:
+    bac_container_name: "webapp"
+    bac_container_port: 8080
+    bac_container_mount_dir: "/opt/webapp"
+    bac_file_index_template: index.html.j2
+    bac_apache_image_version: "latest"
+    bac_apache_website_folder: "/usr/local/apache2/htdocs"
+    docker_add_repo: true
+    docker_yum_repo_url: "https://download.docker.com/linux/rhel/docker-ce.repo"
+    docker_yum_gpg_key: "https://download.docker.com/linux/rhel/gpg"
+    docker_obsolete_packages:
+      - docker
+      - docker-client
+      - docker-client-latest
+      - docker-common
+      - docker-latest
+      - docker-latest
+      - docker-latest-logrotate
+      - docker-logrotate
+      - docker-engine
+      - podman
+      - runc
+    docker_packages:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+
+  tasks:
+    - name: Include geerlingguy.docker
+      ansible.builtin.include_role:
+        name: geerlingguy.docker
+    - name: Include willbrid.basic_apache_container
+      ansible.builtin.include_role:
+        name: "willbrid.basic_apache_container"

@@ -1,0 +1,6 @@
+---
+roles:
+  - src: "geerlingguy.docker"
+
+collections:
+  - community.docker

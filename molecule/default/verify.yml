@@ -1,0 +1,19 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: true
+  vars:
+    url: "http://localhost:8080"
+
+  tasks:
+    - name: Make a get request to "{{ url }}"
+      ansible.builtin.uri:
+        url: "{{ url }}"
+        method: GET
+        status_code: 200
+      register: result
+    - name: Ensure that the status code is 200
+      ansible.builtin.assert:
+        that:
+          - result.status == 200
+        fail_msg: "the status code is different from 200"
