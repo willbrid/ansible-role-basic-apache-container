@@ -27,7 +27,7 @@ La collection **community.docker** doit être préalablement installée via la c
 ansible-galaxy collection install community.docker
 ```
 
-Les systèmes cibles doivent avoir Docker installé. Pour cela, vous pouvez par exemple utiliser le rôle **geerlingguy.docker**.
+Les systèmes cibles doivent avoir Docker installé. Pour cela, vous pouvez par exemple utiliser le rôle **geerlingguy.docker** qui lui même,nécessite la collection **community.general**.
 
 ## Exemple Playbook
 
