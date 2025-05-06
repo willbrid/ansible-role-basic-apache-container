@@ -1,0 +1,36 @@
+---
+argument_specs:
+  main:
+    short_description: "Create basic apache container"
+    description:
+      - "Create basic apache container and hosts a web directory"
+    author: "WillBrid"
+    options:
+      bac_container_name:
+        type: str
+        required: true
+        description: "the container name of the web application"
+      bac_container_port:
+        type: int
+        required: false
+        default: 80
+        description: "the external port of the web application"
+      bac_container_mount_dir:
+        type: str
+        required: true
+        description: "the external directory for hosting the web application"
+      bac_file_index_template:
+        type: str
+        required: false
+        default: "index.html.j2"
+        description: "the index html template to define"
+      bac_apache_image_version:
+        type: str
+        required: false
+        default: "latest"
+        description: "the http tag image to use for the apache"
+      bac_apache_website_folder:
+        type: str
+        required: false
+        default: "/usr/local/apache2/htdocs"
+        description: "the internal directory for hosting the web application in container"
