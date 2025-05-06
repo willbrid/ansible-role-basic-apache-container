@@ -4,7 +4,7 @@ galaxy_info:
   role_name: basic_apache_container
   namespace: willbrid
   description: Webapp installation using apache docker container for RedHat and Debian distribution
-  license: license GPLv3
+  license: license MIT
   min_ansible_version: "2.16"
   platforms:
     - name: Rocky
@@ -25,4 +25,7 @@ galaxy_info:
     - docker
     - httpd
 dependencies:
-  - role: geerlingguy.docker
+  - role: geerlingguy.pip
+    vars:
+      pip_install_packages:
+        - name: docker
