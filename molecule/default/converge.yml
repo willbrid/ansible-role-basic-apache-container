@@ -31,9 +31,15 @@
       - docker-buildx-plugin
 
   tasks:
+    - name: Check if docker is already installed
+      ansible.builtin.command: "docker --version"
+      register: docker_check
+      failed_when: false
+      changed_when: false
     - name: Include geerlingguy.docker
       ansible.builtin.include_role:
         name: geerlingguy.docker
+      when: docker_check.rc != 0
     - name: Include willbrid.basic_apache_container
       ansible.builtin.include_role:
         name: "willbrid.basic_apache_container"
