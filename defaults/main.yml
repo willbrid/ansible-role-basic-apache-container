@@ -1,8 +1,7 @@
 ---
-system_user: test
-domain: test
-webapp_container_name: "webapp"
-webapp_container_port: 80
-webapp_file_index_template: index.html.j2
-apache_image_version: "latest" # httpd image version
-apache_website_folder: "/usr/local/apache2/htdocs"
+bac_container_name: "webapp"
+bac_container_port: 80
+bac_container_mount_dir: ""
+bac_file_index_template: index.html.j2
+bac_apache_image_version: "latest"  # httpd image version
+bac_apache_website_folder: "/usr/local/apache2/htdocs"
