@@ -1,6 +1,6 @@
 # Ansible-role-basic-apache-container
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/willbrid/ansible-role-basic-apache-container/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/willbrid/ansible-role-basic-apache-container/blob/main/LICENSE) [![CI](https://github.com/willbrid/ansible-role-basic-apache-container/actions/workflows/ci.yml/badge.svg)](https://github.com/willbrid/ansible-role-basic-apache-container/actions/workflows/ci.yml)
 
 Ce rôle simple permet de déployer un conteneur Apache à partir de l'image **httpd** et d'y héberger une page web statique **index.html**.
 
