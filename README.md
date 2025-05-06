@@ -21,6 +21,12 @@ Ce rôle repose fortement sur le rôle **geerlingguy.pip**, qui est automatiquem
 
 ## Dépendances
 
+L rôle **geerlingguy.pip** doit être préalablement installé via la commande **ansible-galaxy**.
+
+```bash
+ansible-galaxy role install geerlingguy.pip
+```
+
 La collection **community.docker** doit être préalablement installée via la commande **ansible-galaxy**.
 
 ```bash
