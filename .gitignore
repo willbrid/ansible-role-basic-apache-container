@@ -1,7 +1,22 @@
-*.retry
+# Certificates and keys
+*.jks
+*.p8
+*.p12
+*.key
+
+# Python
 */__pycache__
 *.pyc
 .cache
 
-# macOS
+# Ansible
+.ansible/
+*.retry
+*.orig.*
+
+# Editors
 .DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
