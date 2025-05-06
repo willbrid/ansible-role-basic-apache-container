@@ -21,7 +21,7 @@ Ce rôle repose fortement sur le rôle **geerlingguy.pip**, qui est automatiquem
 
 ## Dépendances
 
-L rôle **geerlingguy.pip** doit être préalablement installé via la commande **ansible-galaxy**.
+Le rôle **geerlingguy.pip** doit être préalablement installé via la commande **ansible-galaxy**.
 
 ```bash
 ansible-galaxy role install geerlingguy.pip
@@ -33,7 +33,7 @@ La collection **community.docker** doit être préalablement installée via la c
 ansible-galaxy collection install community.docker
 ```
 
-Les systèmes cibles doivent avoir Docker installé. Pour cela, vous pouvez par exemple utiliser le rôle **geerlingguy.docker** qui lui même,nécessite la collection **community.general**.
+> Note: Les systèmes cibles doivent avoir `Docker` installé. Pour cela, vous pouvez par exemple utiliser le rôle **geerlingguy.docker** qui lui même, nécessite la collection **community.general**.
 
 ## Exemple Playbook
 
@@ -57,7 +57,7 @@ vim $HOME/install-basic-apache-container/requirements.yml
 cd $HOME/install-basic-apache-container && ansible-galaxy install -r requirements.yml --roles-path roles
 ```
 
-> On suppose qu’un fichier `hosts.ini` (dans le repertoire `$HOME/install-basic-apache-container`) est défini, contenant l’inventaire des serveurs de groupe `webapp` utilisant des distributions Debian ou RedHat.
+> Note: On suppose qu’un fichier `hosts.ini` (dans le repertoire `$HOME/install-basic-apache-container`) est défini, contenant l’inventaire des serveurs de groupe `webapp` utilisant des distributions Debian ou RedHat.
 
 - Utilisation du rôle dans un playbook
 
