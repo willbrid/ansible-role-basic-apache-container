@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/willbrid/ansible-role-basic-apache-container/blob/main/LICENSE) [![CI](https://github.com/willbrid/ansible-role-basic-apache-container/actions/workflows/ci.yml/badge.svg)](https://github.com/willbrid/ansible-role-basic-apache-container/actions/workflows/ci.yml)
 
-Ce rôle simple permet de déployer un conteneur Apache à partir de l'image **httpd** et d'y héberger une page web statique **index.html**.
+Le rôle **ansible-role-basic-apache-container** permet de déployer un conteneur Apache à partir de l'image **httpd** et d'y héberger une page web statique **index.html** qui peut être redéfinie.
 
 ## Exigences
 
@@ -33,7 +33,7 @@ La collection **community.docker** doit être préalablement installée via la c
 ansible-galaxy collection install community.docker
 ```
 
-> Note: Les systèmes cibles doivent avoir `Docker` installé. Pour cela, vous pouvez par exemple utiliser le rôle **geerlingguy.docker** qui lui même, nécessite la collection **community.general**.
+> Note: Les systèmes cibles doivent avoir `Docker` installé. Pour cela, vous pouvez par exemple utiliser le rôle `geerlingguy.docker` qui lui même, nécessite la collection `community.general`.
 
 ## Exemple Playbook
 
@@ -57,7 +57,7 @@ vim $HOME/install-basic-apache-container/requirements.yml
 cd $HOME/install-basic-apache-container && ansible-galaxy install -r requirements.yml --roles-path roles
 ```
 
-> Note: On suppose qu’un fichier `hosts.ini` (dans le repertoire `$HOME/install-basic-apache-container`) est défini, contenant l’inventaire des serveurs de groupe `webapp` utilisant des distributions Debian ou RedHat.
+> Note: On suppose qu’un fichier `hosts.ini` (dans le repertoire `$HOME/install-basic-apache-container`) est défini, contenant l’inventaire des serveurs de groupe `webapp` utilisant des distributions `Debian` ou `RedHat`.
 
 - Utilisation du rôle dans un playbook
 
