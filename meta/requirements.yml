@@ -1,0 +1,8 @@
+---
+roles:
+  - src: "geerlingguy.pip"
+  - src: "geerlingguy.docker"
+
+collections:
+  - community.docker
+  - community.general
