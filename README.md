@@ -40,7 +40,7 @@ ansible-galaxy collection install community.docker
 - Installation du rôle
 
 ```bash
-mkdir -p $HOME/install-basic-apache-container/roles
+mkdir -p $HOME/install-basic-apache-container
 ```
 
 ```bash
@@ -54,7 +54,7 @@ vim $HOME/install-basic-apache-container/requirements.yml
 ```
 
 ```bash
-cd $HOME/install-basic-apache-container && ansible-galaxy install -r requirements.yml --roles-path roles
+cd $HOME/install-basic-apache-container && ansible-galaxy install --force -r requirements.yml
 ```
 
 > Note: On suppose qu’un fichier `hosts.ini` (dans le repertoire `$HOME/install-basic-apache-container`) est défini, contenant l’inventaire des serveurs de groupe `webapp` utilisant des distributions `Debian` ou `RedHat`.
