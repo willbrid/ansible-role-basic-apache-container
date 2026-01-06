@@ -2,42 +2,42 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/willbrid/ansible-role-basic-apache-container/blob/main/LICENSE) [![CI](https://github.com/willbrid/ansible-role-basic-apache-container/actions/workflows/ci.yml/badge.svg)](https://github.com/willbrid/ansible-role-basic-apache-container/actions/workflows/ci.yml)
 
-Le rôle **ansible-role-basic-apache-container** permet de déployer un conteneur Apache à partir de l'image **httpd** et d'y héberger une page web statique **index.html** qui peut être redéfinie.
+The **ansible-role-basic-apache-container** role allows you to deploy a basic apache container from the **httpd** image and host a static web page **index.html** which can be redefined.
 
-## Exigences
+## Requirements
 
-Ce rôle repose fortement sur le rôle **geerlingguy.pip**, qui est automatiquement exécuté en amont afin d’installer le package **Python docker** sur les hôtes cibles, nécessaire au bon fonctionnement du module **community.docker.docker_container**.
+This role relies heavily on the **geerlingguy.pip** role, which is automatically run upstream to install the **Python docker** package on the target hosts, necessary for the proper functioning of the **community.docker.docker_container** module.
 
 ## Description des Variables
 
-|Nom|Type|Description|Obligatoire|Valeur par défaut|
-|---|----|-----------|-----------|-----------------|
-`bac_container_name`|str|nom du conteneur de l'application web à installer|oui|`""`
-`bac_container_port`|int|port du conteneur de l'application web à publier|non|`80`
-`bac_container_mount_dir`|str|chemin du repertoire d'hébergement de l'application web|oui|`""`
-`bac_file_index_template`|str|template jinja de la page index.html|non|`"index.html.j2"`
-`bac_apache_image_version`|str|tag de l'image httpd à utiliser|non|`"latest"`
-`bac_apache_website_folder`|str|repertoire d'hébergement de l'application web à l'intérieur du conteneur |non|`"/usr/local/apache2/htdocs"`
+|Name|Type|Description|Required|Default value|
+|----|----|-----------|--------|-------------|
+`bac_container_name`|str|name of the web application container to install|yes|`""`
+`bac_container_port`|int|port of the web application container to publish|no|`80`
+`bac_container_mount_dir`|str|Ppath to the web application hosting directory|yes|`""`
+`bac_file_index_template`|str|jinja template of the index.html page|no|`"index.html.j2"`
+`bac_apache_image_version`|str|tag of the httpd image to use|no|`"latest"`
+`bac_apache_website_folder`|str|directory to host the web application inside the container|no|`"/usr/local/apache2/htdocs"`
 
-## Dépendances
+## Dependancies
 
-Le rôle **geerlingguy.pip** doit être préalablement installé via la commande **ansible-galaxy**.
+The **geerlingguy.pip** role must be installed beforehand via the **ansible-galaxy** command.
 
 ```bash
 ansible-galaxy role install geerlingguy.pip
 ```
 
-La collection **community.docker** doit être préalablement installée via la commande **ansible-galaxy**.
+The **community.docker** collection must be installed beforehand via the **ansible-galaxy** command.
 
 ```bash
 ansible-galaxy collection install community.docker
 ```
 
-> Note: Les systèmes cibles doivent avoir `Docker` installé. Pour cela, vous pouvez par exemple utiliser le rôle `geerlingguy.docker` qui lui même, nécessite la collection `community.general`.
+> Note: Target systems must have `Docker` installed. For this, you can, for example, use the `geerlingguy.docker` role, which itself requires the `community.general` collection.
 
-## Exemple Playbook
+## Example Playbook
 
-- Installation du rôle
+- Role installation
 
 ```bash
 mkdir -p $HOME/install-basic-apache-container
@@ -49,7 +49,7 @@ vim $HOME/install-basic-apache-container/requirements.yml
 
 ```yaml
 - name: ansible-role-basic-apache-container
-  src: https://github.com/willbrid/ansible-role-basic-apache-container.git
+  src: git+https://github.com/willbrid/ansible-role-basic-apache-container.git
   version: v0.0.1
 ```
 
@@ -57,9 +57,9 @@ vim $HOME/install-basic-apache-container/requirements.yml
 cd $HOME/install-basic-apache-container && ansible-galaxy install --force -r requirements.yml
 ```
 
-> Note: On suppose qu’un fichier `hosts.ini` (dans le repertoire `$HOME/install-basic-apache-container`) est défini, contenant l’inventaire des serveurs de groupe `webapp` utilisant des distributions `Debian` ou `RedHat`.
+> Note: It is assumed that a `hosts.ini` file (in the `$HOME/install-basic-apache-container` directory) is defined, containing the inventory of `webapp` group servers using `Debian` or `RedHat` distributions.
 
-- Utilisation du rôle dans un playbook
+- Using the role in a playbook
 
 ```bash
 vim $HOME/install-basic-apache-container/playbook.yml
@@ -84,10 +84,10 @@ vim $HOME/install-basic-apache-container/playbook.yml
 cd $HOME/install-basic-apache-container && ansible-playbook -i hosts.ini playbook.yml
 ```
 
-## Licence
+## License
 
 MIT
 
-## Informations sur l'auteur
+## Information about the authors
 
 William Bridge NGASSAM
