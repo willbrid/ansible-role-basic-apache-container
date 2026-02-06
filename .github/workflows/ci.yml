@@ -34,7 +34,7 @@ jobs:
           python-version: '3.13' # temporarily set the Python version to 3.13.x
 
       - name: Install test dependencies
-        run: pip3 install yamllint ansible-lint ansible molecule molecule-plugins[docker] docker
+        run: pip3 install yamllint ansible-lint ansible-core=2.19 molecule molecule-plugins[docker] docker
 
       - name: Lint code
         run: |
